@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import Button from './Button'
@@ -27,6 +28,10 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-
+// CSS in JS
+// const headingStyle = {
+//   color: 'red',
+//   backgroundColor: 'black',
+// }
 
 export default Header

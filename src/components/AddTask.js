@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
@@ -15,7 +16,7 @@ const AddTask = ({ onAdd }) => {
 
     onAdd({ text, day, reminder })
 
-    setText('')
+    setText('') 
     setDay('')
     setReminder(false)
   }

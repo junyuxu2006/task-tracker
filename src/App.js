@@ -1,8 +1,16 @@
+//NOTICE
+//my code has not been working and im unable to figure out why
+//this is just here
+
+
+
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Tasks from './components/Tasks'
+import Task from './components/Task'
 import AddTask from './components/AddTask'
 import About from './components/About'
 
@@ -14,12 +22,12 @@ const App = () => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks()
       setTasks(tasksFromServer)
-    }
+    } 
 
     getTasks()
   }, [])
 
-
+  // Fetch Tasks
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks')
     const data = await res.json()
@@ -27,6 +35,7 @@ const App = () => {
     return data
   }
 
+  // Fetch Task
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`)
     const data = await res.json()
@@ -34,6 +43,7 @@ const App = () => {
     return data
   }
 
+  // Add Task
   const addTask = async (task) => {
     const res = await fetch('http://localhost:5000/tasks', {
       method: 'POST',
@@ -47,21 +57,23 @@ const App = () => {
 
     setTasks([...tasks, data])
 
-
+    // const id = Math.floor(Math.random() * 10000) + 1
+    // const newTask = { id, ...task }
+    // setTasks([...tasks, newTask])
   }
 
-
+  // Delete Task
   const deleteTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'DELETE',
     })
-
+    //We should control the response status to decide if we will change the state or not.
     res.status === 200
       ? setTasks(tasks.filter((task) => task.id !== id))
       : alert('Error Deleting This Task')
   }
 
-
+  // Toggle Reminder
   const toggleReminder = async (id) => {
     const taskToToggle = await fetchTask(id)
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
@@ -82,7 +94,6 @@ const App = () => {
       )
     )
   }
-
   return (
     <Router>
       <div className='container'>
