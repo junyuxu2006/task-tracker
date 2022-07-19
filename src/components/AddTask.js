@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
@@ -8,15 +7,21 @@ const AddTask = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-
+// Alerts user if there is no task added
     if (!text) {
       alert('Please add a task')
       return
     }
+// Alerts user if there is no date and time entered
+    if (!day) {
+alert('Please add a Date and Time')
+return
+
+    }
 
     onAdd({ text, day, reminder })
 
-    setText('') 
+    setText('')
     setDay('')
     setReminder(false)
   }
@@ -33,10 +38,10 @@ const AddTask = ({ onAdd }) => {
         />
       </div>
       <div className='form-control'>
-        <label>Day & Time</label>
+        <label>Date and Time</label>
         <input
           type='text'
-          placeholder='Add Day & Time'
+          placeholder='Add a Date & Time'
           value={day}
           onChange={(e) => setDay(e.target.value)}
         />
